@@ -28,18 +28,30 @@ const BasicForm = (props) => {
   }
 
   const getFirstNAme = (event)=>{
-    setTouchFirstName(true);
+    
     setEnteredFirstName(event.target.value);
   }
 
+  const getFirstTouch = () =>{
+    setTouchFirstName(true);
+  }
+
   const getLasttNAme = (event)=>{
-    setTouchSecondName(true);
+    
     setEnteredSecondName(event.target.value);
   }
 
+  const getLastTouch = () =>{
+    setTouchSecondName(true);
+  }
+
   const getEmail = (event)=>{
-    setTouchEmail(true);
+   
     setEnteredEmail(event.target.value);
+  }
+
+  const getemailTouch = () =>{
+    setTouchEmail(true);
   }
   const submitHAndler=event=>{
     event.preventDefault();
@@ -60,19 +72,19 @@ const BasicForm = (props) => {
       <div className='control-group'>
         <div className={firstNameClasses}>
           <label htmlFor='name'>First Name</label>
-          <input type='text' id='name' onChange={getFirstNAme} value={enteredFirstName}/>
+          <input type='text' id='name' onChange={getFirstNAme} onBlur={getFirstTouch} value={enteredFirstName}/>
           {<p hidden={EnteredFirstNameIsValid || !touchFirstName} className='error-msg'>Please Enter Valid First Name</p>}
         </div>
         <div className={lastNameClasses}>
           <label htmlFor='name'>Last Name</label>
-          <input type='text' id='name' onChange={getLasttNAme} value={enteredSecondName}/>
+          <input type='text' id='name' onChange={getLasttNAme} onBlur={getLastTouch} value={enteredSecondName}/>
           {<p hidden={EnteredSecondNameIsValid || !touchSecondName} className='error-msg'>Please Enter Valid Last Name</p>}
          
         </div>
       </div>
       <div className={EmailClasses}>
         <label htmlFor='name'>E-Mail Address</label>
-        <input type='text' id='name' onChange={getEmail} value={enteredEmail}/>
+        <input type='text' id='name' onChange={getEmail}  onBlur={getemailTouch} value={enteredEmail}/>
         {<p hidden={EnteredEmailIsValid || !touchEmail} className='error-msg'>Please Enter Valid Email</p>}
        
       </div>
