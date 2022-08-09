@@ -1,19 +1,49 @@
-import { useState } from "react";
+
+import useInput from "./hooks/UseInput";
 
 const BasicForm = (props) => {
-  const [enteredFirstName , setEnteredFirstName]=useState('');
-  const [enteredSecondName , setEnteredSecondName]=useState('');
-  const [enteredEmail, setEnteredEmail]=useState('');
-  const[touchFirstName,setTouchFirstName]=useState(false);
-  const[touchSecondName,setTouchSecondName]=useState(false);
-  const[touchEmail,setTouchEmail]=useState(false);
+  const {
+    enteredValue:enteredFirstName ,
+    isTouch:touchFirstName,
+    EnteredValueIsValid:EnteredFirstNameIsValid,
+    getValueInput:getFirstNAme,
+    getIsTouch:getFirstTouch,
+    reset:resetFirstName
+  }= useInput(value=>value.trim().length !== 0);
 
-  const enteredNameFirst= enteredFirstName.trim().length !== 0;
-  const enteredNameLast= enteredSecondName.trim().length  !== 0;
-  const enteredEmaill= enteredEmail.trim().length  !== 0;
-  const EnteredFirstNameIsValid = enteredNameFirst && touchFirstName;
-  const EnteredSecondNameIsValid = enteredNameLast&& touchSecondName;
-  const EnteredEmailIsValid = enteredEmaill && touchEmail && enteredEmail.includes('@');
+
+  const {
+    enteredValue:enteredSecondName ,
+    isTouch:touchSecondName,
+    EnteredValueIsValid:EnteredSecondNameIsValid,
+    getValueInput:getLasttNAme,
+    getIsTouch:getLastTouch,
+    reset:resetLastName
+  }= useInput(value=>value.trim().length !== 0);
+
+
+  const {
+    enteredValue:enteredEmail ,
+    isTouch:touchEmail,
+    EnteredValueIsValid:EnteredEmailIsValid,
+    getValueInput:getEmail,
+    getIsTouch:getemailTouch,
+    reset:resetEmail
+  }= useInput(value=>value.includes('@'));
+ 
+  // const [enteredFirstName , setEnteredFirstName]=useState('');
+  // const [enteredSecondName , setEnteredSecondName]=useState('');
+  // const [enteredEmail, setEnteredEmail]=useState('');
+  // const[touchFirstName,setTouchFirstName]=useState(false);
+  // const[touchSecondName,setTouchSecondName]=useState(false);
+  // const[touchEmail,setTouchEmail]=useState(false);
+
+  // const enteredNameFirst= enteredFirstName.trim().length !== 0;
+  // const enteredNameLast= enteredSecondName.trim().length  !== 0;
+  // const enteredEmaill= enteredEmail.trim().length  !== 0;
+  // const EnteredFirstNameIsValid = enteredNameFirst && touchFirstName;
+  // const EnteredSecondNameIsValid = enteredNameLast&& touchSecondName;
+  // const EnteredEmailIsValid = enteredEmaill && touchEmail && enteredEmail.includes('@');
 
   let formIsValid=false;
   
@@ -27,44 +57,47 @@ const BasicForm = (props) => {
     formIsValid=true;
   }
 
-  const getFirstNAme = (event)=>{
+  // const getFirstNAme = (event)=>{
     
-    setEnteredFirstName(event.target.value);
-  }
+  //   setEnteredFirstName(event.target.value);
+  // }
 
-  const getFirstTouch = () =>{
-    setTouchFirstName(true);
-  }
+  // const getFirstTouch = () =>{
+  //   setTouchFirstName(true);
+  // }
 
-  const getLasttNAme = (event)=>{
+  // const getLasttNAme = (event)=>{
     
-    setEnteredSecondName(event.target.value);
-  }
+  //   setEnteredSecondName(event.target.value);
+  // }
 
-  const getLastTouch = () =>{
-    setTouchSecondName(true);
-  }
+  // const getLastTouch = () =>{
+  //   setTouchSecondName(true);
+  // }
 
-  const getEmail = (event)=>{
+  // const getEmail = (event)=>{
    
-    setEnteredEmail(event.target.value);
-  }
+  //   setEnteredEmail(event.target.value);
+  // }
 
-  const getemailTouch = () =>{
-    setTouchEmail(true);
-  }
+  // const getemailTouch = () =>{
+  //   setTouchEmail(true);
+  // }
   const submitHAndler=event=>{
     event.preventDefault();
     if(!formIsValid){
       return;
     }
     alert('Login Success');
-    setEnteredFirstName('');
-    setEnteredSecondName('');
-    setEnteredEmail('');
-    setTouchFirstName(false);
-    setTouchSecondName(false);
-    setTouchEmail(false);
+    resetFirstName();
+    resetLastName();
+    resetEmail();
+    // setEnteredFirstName('');
+    // setEnteredSecondName('');
+    // setEnteredEmail('');
+    // setTouchFirstName(false);
+    // setTouchSecondName(false);
+    // setTouchEmail(false);
     formIsValid=false;
   }
   return (
